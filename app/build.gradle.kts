@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.messaging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -72,10 +73,10 @@ dependencies {
     androidTestImplementation(libs.hilt.test)
     kaptAndroidTest(libs.hilt.compiler)
 
-//    implementation(project(":usecases"))
-//    implementation(project(":domain"))
-//    implementation(project(":data"))
-//    implementation(project(":framework"))
+    implementation(project(":usecases"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":framework"))
 
     debugImplementation(libs.leakcanary.android)
 
@@ -85,6 +86,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.firebase.messaging)
 }
 
 kapt {
