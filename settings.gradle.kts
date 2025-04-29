@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "mas_llajua"
 include(":app")
+include(":framework")
 include(":data")
 include(":domain")
-include(":framework")
 include(":usecases")
