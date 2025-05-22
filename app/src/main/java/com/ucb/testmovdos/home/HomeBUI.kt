@@ -38,10 +38,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun HomeUI(
+fun HomeBUI(
     viewModel: HomeViewModel = viewModel(),
     onGoToSend: () -> Unit,
-    onGoToRight: () -> Unit
+    onGoToLeft: () -> Unit
 ) {
     val context = LocalContext.current
     val message = viewModel.message.value
@@ -81,7 +81,7 @@ fun HomeUI(
             ){
                 // Botón de flecha izquierda
                 IconButton(
-                    onClick = { /* Acción izquierda */ },
+                    onClick = onGoToLeft,
                     modifier = Modifier
                         .padding(end = 8.dp)
                         .size(40.dp)
@@ -111,7 +111,7 @@ fun HomeUI(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     Text(
-                        text = "Plan FLEX 5",
+                        text = "Plan FLEX 8",
                         style = MaterialTheme.typography.titleLarge,
                         color = Color(0xFFF57261)
                     )
@@ -123,7 +123,7 @@ fun HomeUI(
                     ) {
                         Text("Antes", color = Color.Gray)
                         Text(
-                            text = " \$270 ",
+                            text = " \$370 ",
                             style = MaterialTheme.typography.bodyLarge.copy(
                                 textDecoration = TextDecoration.LineThrough,
                                 fontWeight = FontWeight.Bold
@@ -140,7 +140,7 @@ fun HomeUI(
                     ) {
                         Text("Ahora", color = Color.Gray)
                         Text(
-                            text = " \$199 ",
+                            text = " \$299 ",
                             style = MaterialTheme.typography.headlineMedium.copy(
                                 fontWeight = FontWeight.ExtraBold
                             ),
@@ -182,7 +182,7 @@ fun HomeUI(
 
                 // Botón de flecha derecha
                 IconButton(
-                    onClick = onGoToRight,
+                    onClick = { /* Acción derecha */ },
                     modifier = Modifier
                         .padding(start = 8.dp)
                         .size(40.dp)
