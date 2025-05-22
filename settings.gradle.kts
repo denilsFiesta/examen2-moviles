@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "mas_llajua"
+rootProject.name = "testmovdos"
 include(":app")
 include(":framework")
 include(":data")
