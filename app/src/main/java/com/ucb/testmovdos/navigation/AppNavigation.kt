@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ucb.testmovdos.home.HomeUI
+import com.ucb.testmovdos.sendsim.SendSIMUI
 
 @Composable
 fun AppNavigation() {
@@ -15,7 +16,13 @@ fun AppNavigation() {
         startDestination = Screens.Home.route
     ){
         composable(Screens.Home.route) {
-            HomeUI()
+            HomeUI(
+                onGoToSend = {navController.navigate(Screens.Send.route)}
+            )
+        }
+
+        composable(Screens.Send.route) {
+            SendSIMUI()
         }
     }
 }

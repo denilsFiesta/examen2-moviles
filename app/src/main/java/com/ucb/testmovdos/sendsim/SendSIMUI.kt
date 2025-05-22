@@ -1,5 +1,6 @@
 package com.ucb.testmovdos.sendsim
 
+import PhoneVisualTransformation
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,19 +10,28 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 
 @Composable
@@ -31,6 +41,23 @@ fun SendSIMUI(
     val phone by viewModel.phone.collectAsState()
     val latitude by viewModel.latitude.collectAsState()
     val longitude by viewModel.longitude.collectAsState()
+
+    val lat = latitude.toDoubleOrNull() ?: -17.3935
+    val lon = longitude.toDoubleOrNull() ?: -66.1570
+    val initialPosition = LatLng(lat, lon)
+
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(initialPosition, 15f)
+    }
+
+    LaunchedEffect(cameraPositionState.isMoving) {
+        if (!cameraPositionState.isMoving) {
+            val center = cameraPositionState.position.target
+            viewModel.onLatitudeChange(center.latitude.toString())
+            viewModel.onLongitudeChange(center.longitude.toString())
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -50,6 +77,8 @@ fun SendSIMUI(
             onValueChange = viewModel::onPhoneChange,
             label = { Text("Teléfono de referencia") },
             singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Phone),
+            visualTransformation = PhoneVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -60,6 +89,7 @@ fun SendSIMUI(
             onValueChange = viewModel::onLatitudeChange,
             label = { Text("Latitud") },
             singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -70,6 +100,7 @@ fun SendSIMUI(
             onValueChange = viewModel::onLongitudeChange,
             label = { Text("Longitud") },
             singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -78,14 +109,18 @@ fun SendSIMUI(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(300.dp)
                 .border(1.dp, Color.LightGray, RoundedCornerShape(8.dp))
         ) {
-            Text(
-                text = "Aquí irá el mapa (Google Maps)",
-                modifier = Modifier.align(Alignment.Center),
-                color = Color.Gray
-            )
+            GoogleMap(
+                modifier = Modifier.fillMaxSize(),
+                cameraPositionState = cameraPositionState
+            ) {
+                Marker(
+                    state = MarkerState(position = initialPosition),
+                    title = "Ubicación seleccionada"
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(32.dp))

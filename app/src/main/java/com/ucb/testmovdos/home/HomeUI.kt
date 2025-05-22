@@ -39,7 +39,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun HomeUI(
-    viewModel: HomeViewModel = viewModel()
+    viewModel: HomeViewModel = viewModel(),
+    onGoToSend: () -> Unit,
 ) {
     val context = LocalContext.current
     val message = viewModel.message.value
@@ -201,7 +202,7 @@ fun HomeUI(
 
         // Botón inferior
         Button(
-            onClick = { /* Acción del botón inferior */ },
+            onClick = onGoToSend,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()

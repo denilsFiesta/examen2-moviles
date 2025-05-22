@@ -38,7 +38,14 @@ firebaseMessaging = "24.1.1"
 runtimeAndroid = "1.7.8"
 roomCommonJvm = "2.7.0"
 
+maps-compose = "2.11.4"
+maps-playservices = "18.2.0"
+
 [libraries]
+
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
+maps-playservices = { module = "com.google.android.gms:play-services-maps", version.ref = "maps-playservices" }
+
 compose-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIcons"}
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
