@@ -20,12 +20,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -46,16 +49,21 @@ fun SendSIMUI(
     val lon = longitude.toDoubleOrNull() ?: -66.1570
     val initialPosition = LatLng(lat, lon)
 
+    val markerPosition = remember { mutableStateOf(initialPosition) }
+
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(initialPosition, 15f)
     }
 
-    LaunchedEffect(cameraPositionState.isMoving) {
-        if (!cameraPositionState.isMoving) {
-            val center = cameraPositionState.position.target
-            viewModel.onLatitudeChange(center.latitude.toString())
-            viewModel.onLongitudeChange(center.longitude.toString())
-        }
+    LaunchedEffect(markerPosition.value) {
+
+        cameraPositionState.animate(
+            update = CameraUpdateFactory.newLatLngZoom(markerPosition.value, 15f),
+            durationMs = 700
+        )
+
+        viewModel.onLatitudeChange(markerPosition.value.latitude.toString())
+        viewModel.onLongitudeChange(markerPosition.value.longitude.toString())
     }
 
 
@@ -114,7 +122,10 @@ fun SendSIMUI(
         ) {
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
-                cameraPositionState = cameraPositionState
+                cameraPositionState = cameraPositionState,
+                onMapClick = { latLng ->
+                    markerPosition.value = latLng
+                }
             ) {
                 Marker(
                     state = MarkerState(position = initialPosition),

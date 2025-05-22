@@ -41,7 +41,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun HomeBUI(
     viewModel: HomeViewModel = viewModel(),
     onGoToSend: () -> Unit,
-    onGoToLeft: () -> Unit
+    onGoToLeft: () -> Unit,
+    onGoToRight: () -> Unit
 ) {
     val context = LocalContext.current
     val message = viewModel.message.value
@@ -150,7 +151,7 @@ fun HomeBUI(
                     }
 
                     Text(
-                        text = "5GB",
+                        text = "8GB",
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Black
                         ),
@@ -182,7 +183,7 @@ fun HomeBUI(
 
                 // Botón de flecha derecha
                 IconButton(
-                    onClick = { /* Acción derecha */ },
+                    onClick = onGoToRight,
                     modifier = Modifier
                         .padding(start = 8.dp)
                         .size(40.dp)

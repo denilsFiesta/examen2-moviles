@@ -5,5 +5,6 @@ sealed class Screens(
 ) {
     object Home : Screens("home_screen")
     object HomeB: Screens("home_b_screen")
+    object HomeC: Screens("home_c_screen")
     object Send: Screens("send_sim")
 }

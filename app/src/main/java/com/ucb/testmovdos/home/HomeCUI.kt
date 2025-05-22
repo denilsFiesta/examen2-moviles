@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun HomeUI(
+fun HomeCUI(
     viewModel: HomeViewModel = viewModel(),
     onGoToSend: () -> Unit,
     onGoToLeft: () -> Unit,
@@ -112,7 +112,7 @@ fun HomeUI(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     Text(
-                        text = "Plan FLEX 5",
+                        text = "Plan FLEX 10",
                         style = MaterialTheme.typography.titleLarge,
                         color = Color(0xFFF57261)
                     )
@@ -124,7 +124,7 @@ fun HomeUI(
                     ) {
                         Text("Antes", color = Color.Gray)
                         Text(
-                            text = " \$270 ",
+                            text = " \$470 ",
                             style = MaterialTheme.typography.bodyLarge.copy(
                                 textDecoration = TextDecoration.LineThrough,
                                 fontWeight = FontWeight.Bold
@@ -141,7 +141,7 @@ fun HomeUI(
                     ) {
                         Text("Ahora", color = Color.Gray)
                         Text(
-                            text = " \$199 ",
+                            text = " \$399 ",
                             style = MaterialTheme.typography.headlineMedium.copy(
                                 fontWeight = FontWeight.ExtraBold
                             ),
@@ -151,7 +151,7 @@ fun HomeUI(
                     }
 
                     Text(
-                        text = "5GB",
+                        text = "10GB",
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Black
                         ),
