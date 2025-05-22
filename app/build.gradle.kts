@@ -87,6 +87,7 @@ dependencies {
 
     implementation(libs.hilt.navigation.compose)
     implementation(libs.firebase.messaging)
+    implementation(libs.compose.icons.extended)
 }
 
 kapt {
