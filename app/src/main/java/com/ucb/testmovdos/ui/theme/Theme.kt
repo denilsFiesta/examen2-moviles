@@ -1,6 +1,5 @@
-package com.ucb.mas_llajua.ui.theme
+package com.ucb.testmovdos.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

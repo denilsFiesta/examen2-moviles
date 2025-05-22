@@ -1,4 +1,4 @@
-package com.ucb.mas_llajua.ui.theme
+package com.ucb.testmovdos.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

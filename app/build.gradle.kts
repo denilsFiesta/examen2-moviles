@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
 }
 android {
-    namespace = "com.ucb.mas_llajua"
+    namespace = "com.ucb.testmovdos"
     compileSdk = 35
 
     defaultConfig {
