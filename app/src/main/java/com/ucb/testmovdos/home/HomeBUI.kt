@@ -31,11 +31,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ucb.testmovdos.R
 
 @Composable
 fun HomeBUI(
@@ -56,7 +58,7 @@ fun HomeBUI(
                 .align(Alignment.TopCenter),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Título
+
             Text(
                 text = "Nuestros planes móviles",
                 style = MaterialTheme.typography.headlineSmall,
@@ -72,7 +74,6 @@ fun HomeBUI(
                 modifier = Modifier.padding(vertical = 8.dp)
             )
 
-            // CONTENEDOR con flechas y tarjeta del plan
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -80,7 +81,7 @@ fun HomeBUI(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ){
-                // Botón de flecha izquierda
+
                 IconButton(
                     onClick = onGoToLeft,
                     modifier = Modifier
@@ -99,7 +100,6 @@ fun HomeBUI(
                     )
                 }
 
-                // Tarjeta del plan
                 Column(
                     modifier = Modifier
                         .weight(1f)
@@ -169,19 +169,55 @@ fun HomeBUI(
                     )
 
                     benefits.forEach {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
+                        Text(
+                            text = "✓ $it",
+                            color = Color.Black,
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 4.dp)
-                        ) {
-                            Text("✓", color = Color.Black, modifier = Modifier.padding(end = 8.dp))
-                            Text(text = it, color = Color.Black)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    val socialIcons = listOf(
+                        R.drawable.ic_whatsapp,
+                        R.drawable.ic_facebook,
+                        R.drawable.ic_messenger,
+                        R.drawable.ic_x,
+                        R.drawable.ic_instagram,
+                        R.drawable.ic_snapchat,
+                        R.drawable.ic_telegram
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 0.dp, top = 12.dp),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        socialIcons.forEach { iconRes ->
+                            IconButton(
+                                onClick = {},
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .background(Color.Black, CircleShape)
+                                    .padding(4.dp)
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = iconRes),
+                                    contentDescription = null,
+                                    tint = Color.White,
+                                    modifier = Modifier.fillMaxSize(0.6f)
+                                )
+                            }
                         }
                     }
                 }
 
-                // Botón de flecha derecha
+
                 IconButton(
                     onClick = onGoToRight,
                     modifier = Modifier
@@ -202,7 +238,7 @@ fun HomeBUI(
             }
         }
 
-        // Botón inferior
+
         Button(
             onClick = onGoToSend,
             modifier = Modifier
